@@ -1,13 +1,16 @@
 package com.rcm.sistemas.condominio.domain.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Proprietario {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
@@ -27,5 +30,9 @@ public class Proprietario {
 
     @Column(name = "Titulo_Eleitor", nullable = false, columnDefinition = "VARCHAR(10)")
     private String titEleitor;
+
+    @ManyToOne()
+    @JoinColumn(name = "apartamento_id", nullable = false)
+    private Apartamento apartamento;
 
 }
